@@ -23,10 +23,10 @@ public class MainActivityFragment extends Fragment {
     private static final int CAMERA_REQUEST = 1888;
     private Button screenShotButton;
     private ImageView imageView;
-    private int[] baseP1 =new int[2];
-    private int[] baseP2 =new int[2];
-    private int[] objP1 =new int[2];
-    private int[] objP2 =new int[2];
+    private float[] baseP1 =new float[2];
+    private float[] baseP2 =new float[2];
+    private float[] objP1 =new float[2];
+    private float[] objP2 =new float[2];
     int numberOfClicks = 0;
     private double actualLengthOfBaseObject = 5.4; //cm
 
@@ -40,65 +40,64 @@ public class MainActivityFragment extends Fragment {
         imageView = (ImageView) view.findViewById(R.id.imageView1);
         screenShotButton = (Button) view.findViewById(R.id.screen_shot_button);
         screenShotButton.setOnClickListener(screenShotButtonClickListener);
-//        imageView.setOnTouchListener(imgSourceOnTouchListener);
-        imageView.setOnClickListener(imgSourceOnClickListener);
+        imageView.setOnTouchListener(imgSourceOnTouchListener);
+//        imageView.setOnClickListener(imgSourceOnClickListener);
         return view;
     }
 
-    View.OnClickListener imgSourceOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            numberOfClicks++;
-            if(numberOfClicks == 1) {
-                view.getLocationOnScreen(baseP1);
-                Toast.makeText(getContext(),"clicked1", Toast.LENGTH_SHORT).show();
-            }
-            else if(numberOfClicks == 2) {
-                view.getLocationOnScreen(baseP2);
-                Toast.makeText(getContext(),"clicked2", Toast.LENGTH_SHORT).show();
-            }
-            else if(numberOfClicks == 3) {
-                view.getLocationOnScreen(objP1);
-                Toast.makeText(getContext(),"clicked3", Toast.LENGTH_SHORT).show();
-            }
-            else if(numberOfClicks == 4) {
-                view.getLocationOnScreen(objP2);
-                screenShotButton.setText("Calculate Dimensions");
-                Toast.makeText(getContext(),"clicked4", Toast.LENGTH_SHORT).show();
-            }
-            else {}
-        }
-    };
-//    View.OnTouchListener imgSourceOnTouchListener = new View.OnTouchListener(){
+//    View.OnClickListener imgSourceOnClickListener = new View.OnClickListener() {
 //        @Override
-//        public boolean onTouch(View view, MotionEvent event) {
+//        public void onClick(View view) {
 //            numberOfClicks++;
 //            if(numberOfClicks == 1) {
-//                baseP1[0] = event.getX();
-//                baseP1[1] = event.getY();
+//                view.getLocationOnScreen(baseP1);
 //                Toast.makeText(getContext(),"clicked1", Toast.LENGTH_SHORT).show();
 //            }
 //            else if(numberOfClicks == 2) {
-//                baseP2[0] = event.getX();
-//                baseP2[1] = event.getY();
+//                view.getLocationOnScreen(baseP2);
 //                Toast.makeText(getContext(),"clicked2", Toast.LENGTH_SHORT).show();
 //            }
 //            else if(numberOfClicks == 3) {
-//                objP1[0] = event.getX();
-//                objP1[1] = event.getY();
+//                view.getLocationOnScreen(objP1);
 //                Toast.makeText(getContext(),"clicked3", Toast.LENGTH_SHORT).show();
 //            }
 //            else if(numberOfClicks == 4) {
-//                objP2[0] = event.getX();
-//                objP2[1] = event.getY();
+//                view.getLocationOnScreen(objP2);
 //                screenShotButton.setText("Calculate Dimensions");
 //                Toast.makeText(getContext(),"clicked4", Toast.LENGTH_SHORT).show();
 //            }
 //            else {}
-//            return true;
 //        }
-//
 //    };
+
+    View.OnTouchListener imgSourceOnTouchListener = new View.OnTouchListener(){
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+            if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                numberOfClicks++;
+                if (numberOfClicks == 1) {
+                    baseP1[0] = event.getX();
+                    baseP1[1] = event.getY();
+                    Toast.makeText(getContext(), "clicked1", Toast.LENGTH_SHORT).show();
+                } else if (numberOfClicks == 2) {
+                    baseP2[0] = event.getX();
+                    baseP2[1] = event.getY();
+                    Toast.makeText(getContext(), "clicked2", Toast.LENGTH_SHORT).show();
+                } else if (numberOfClicks == 3) {
+                    objP1[0] = event.getX();
+                    objP1[1] = event.getY();
+                    Toast.makeText(getContext(), "clicked3", Toast.LENGTH_SHORT).show();
+                } else if (numberOfClicks == 4) {
+                    objP2[0] = event.getX();
+                    objP2[1] = event.getY();
+                    screenShotButton.setText("Calculate Dimensions");
+                    Toast.makeText(getContext(), "clicked4", Toast.LENGTH_SHORT).show();
+                } else {
+                }
+            }
+            return true;
+        }
+    };
 
     View.OnClickListener screenShotButtonClickListener = new View.OnClickListener() {
         @Override
