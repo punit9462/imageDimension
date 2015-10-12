@@ -112,7 +112,7 @@ public class MainActivityFragment extends Fragment {
             }
         }
     };
-    ssh -T git@github.com
+
     public void calculateDistances() {
         double baseLength = Math.sqrt((baseP2[0]-baseP1[0])*(baseP2[0]-baseP1[0])+(baseP2[1]-baseP1[1])*(baseP2[1]-baseP1[1]));
         double objLength = Math.sqrt((objP2[0]-objP1[0])*(objP2[0]-objP1[0])+(objP2[1]-objP1[1])*(objP2[1]-objP1[1]));
