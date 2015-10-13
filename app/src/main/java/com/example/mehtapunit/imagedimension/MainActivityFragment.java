@@ -22,13 +22,13 @@ public class MainActivityFragment extends Fragment {
 
     private static final int CAMERA_REQUEST = 1888;
     private Button screenShotButton;
-    private ImageView imageView;
+    private MyImageView imageView;
     private float[] baseP1 =new float[2];
     private float[] baseP2 =new float[2];
     private float[] objP1 =new float[2];
     private float[] objP2 =new float[2];
     int numberOfClicks = 0;
-    private double actualLengthOfBaseObject = 5.4; //cm
+    private double actualLengthOfBaseObject = 4.3; //cm
 
     public MainActivityFragment() {
     }
@@ -37,7 +37,7 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        imageView = (ImageView) view.findViewById(R.id.imageView1);
+        imageView = (MyImageView) view.findViewById(R.id.imageView1);
         screenShotButton = (Button) view.findViewById(R.id.screen_shot_button);
         screenShotButton.setOnClickListener(screenShotButtonClickListener);
         imageView.setOnTouchListener(imgSourceOnTouchListener);
