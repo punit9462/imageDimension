@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -22,21 +23,6 @@ public class MyImageView extends ImageView {
     private Bitmap  mBitmap;
     private Canvas  mCanvas;
     private Paint   mBitmapPaint;
-    public MyImageView(Context context) {
-        super(context);
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setDither(true);
-        mPaint.setColor(0xFFFF0000);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mPaint.setStrokeWidth(20);
-        mBitmapPaint = new Paint();
-        mBitmapPaint.setColor(Color.RED);
-
-        mPath = new Path();
-    }
 
     @Override
     public void draw(Canvas canvas) {
@@ -100,6 +86,22 @@ public class MyImageView extends ImageView {
         // kill this so we don't double draw
         mPath.reset();
         // mPath= new Path();
+    }
+
+    public MyImageView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setDither(true);
+        mPaint.setColor(0xFFFF0000);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeJoin(Paint.Join.ROUND);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        mPaint.setStrokeWidth(20);
+        mBitmapPaint = new Paint();
+        mBitmapPaint.setColor(Color.RED);
+
+        mPath = new Path();
     }
 
 }
