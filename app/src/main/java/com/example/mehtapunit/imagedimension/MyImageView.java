@@ -19,6 +19,7 @@ public class MyImageView extends ImageView {
     private Paint mPaint;
     private Path mPath;
 
+
     public float getFirstX() {
         return firstX;
     }
