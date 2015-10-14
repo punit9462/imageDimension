@@ -10,6 +10,18 @@
         android:layout_height="wrap_content"
         android:text="Take Screenshot"/>
 
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"/>
+
+    <Button
+        android:id="@+id/calculate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calculate"/>
+
     <com.example.mehtapunit.imagedimension.MyImageView
         android:id="@+id/imageView1"
         android:layout_height="match_parent"

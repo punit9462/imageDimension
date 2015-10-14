@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.PriorityQueue;
 import java.util.logging.Logger;
 
 /**
@@ -22,6 +23,7 @@ public class MainActivityFragment extends Fragment {
 
     private static final int CAMERA_REQUEST = 1888;
     private Button screenShotButton;
+    private Button submitButton;
     private MyImageView imageView;
     private float[] baseP1 =new float[2];
     private float[] baseP2 =new float[2];
@@ -29,6 +31,7 @@ public class MainActivityFragment extends Fragment {
     private float[] objP2 =new float[2];
     int numberOfClicks = 0;
     private double actualLengthOfBaseObject = 4.3; //cm
+    private Button calculateButton;
 
     public MainActivityFragment() {
     }
@@ -39,8 +42,12 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         imageView = (MyImageView) view.findViewById(R.id.imageView1);
         screenShotButton = (Button) view.findViewById(R.id.screen_shot_button);
+        submitButton = (Button) view.findViewById(R.id.submit_button);
+        calculateButton = (Button) view.findViewById(R.id.calculate_button);
         screenShotButton.setOnClickListener(screenShotButtonClickListener);
-        imageView.setOnTouchListener(imgSourceOnTouchListener);
+        submitButton.setOnClickListener(submitButtonClickListener);
+        calculateButton.setOnClickListener(calculateButtonClickListener);
+  //      imageView.setOnTouchListener(imgSourceOnTouchListener);
 //        imageView.setOnClickListener(imgSourceOnClickListener);
         return view;
     }
@@ -102,13 +109,34 @@ public class MainActivityFragment extends Fragment {
     View.OnClickListener screenShotButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(numberOfClicks == 0) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        }
+    };
+
+    View.OnClickListener submitButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (!imageView.getIsBaseSet()) {
+                baseP1[0] = imageView.getFirstX();
+                baseP1[1] = imageView.getFirstY();
+                baseP2[0] = imageView.getSecondX();
+                baseP2[1] = imageView.getSecondY();
+                imageView.setIsBaseSet(true);
+                imageView.setNumberOfTouches(0);
+            } else {
+                objP1[0] = imageView.getFirstX();
+                objP1[1] = imageView.getFirstY();
+                objP2[0] = imageView.getSecondX();
+                objP2[1] = imageView.getSecondY();
             }
-            else {
-                calculateDistances();
-            }
+        }
+    };
+
+    View.OnClickListener calculateButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            calculateDistances();
         }
     };
 
@@ -128,5 +156,6 @@ public class MainActivityFragment extends Fragment {
             imageView.setImageBitmap(photo);
         }
     }
+
 
 }
